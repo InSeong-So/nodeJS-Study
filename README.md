@@ -1,9 +1,17 @@
 # NodeJS 공부 저장소
+## Reference
+1. [NodeJS 강좌](https://velopert.com/133)
+
+<hr>
+
 ## NodeJS 란?
 - Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임
 - 이벤트 기반, 논 블로킹 I/O 모델을 사용하여 가볍고 효율적
 - 패키지 생태계인 npm은 세계에서 가장 큰 오픈 소스 라이브러리임
 - 아파치와 같은 웹서버가 아니므로 HTTP 서버를 직접 작성해야 함
+
+<hr>
+<br>
 
 ## 특징
 - 비동기 I/O 처리 및 이벤트 위주: Node.js 라이브러리의 모든 API는 비동기식이며 논 블로킹(Non-blocking)임. Node.js 기반 서버는 API가 실행되었을때, 데이터를 반환할때까지 기다리지 않고 다음 API 를 실행하며 이전에 실행했던 API가 결과값을 반환할 때는 NodeJS의 이벤트 알림 메커니즘을 통해 결과값을 받아옴
@@ -12,8 +20,16 @@
 - 노 버퍼링: Node.js 어플리케이션은 데이터 버퍼링이 없고 이를 chunk로 출력함.
 - 라이센스: MIT License 적용
 
+<hr>
+<br>
+
+## 사용처
+- 입출력이 잦은 어플리케이션
+- 데이터 스트리밍 어플리케이션
+- 데이터를 실시간으로 다루는 어플리케이션
+- JSON API 기반 어플리케이션
+- 싱글페이지 어플리케이션
+- **CPU 사용률이 높은 어플리케이션에선 Node.js 사용을 권장하지 않음**
 
 <hr>
-
-# Reference
-1. [NodeJS 강좌](https://velopert.com/133)
+<br>
