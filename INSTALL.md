@@ -1,5 +1,4 @@
-# Rasberry-Pi 에 NodeJs 설치하기
-## 기본 설정
+# Rasberry-Pi 에 NodeJs 설치하기 - 기본 설정
 ```sh
 # 패키지 관리자 업데이트
 sudo apt-get update
@@ -107,7 +106,7 @@ node index.js
 <hr>
 <br>
 
-## 라우팅 설정 및 html 파일 로드
+# Rasberry-Pi 에 NodeJs 설치하기 - 라우팅 설정 및 html 파일 로드
 ```sh
 # index.js 수정
 vi index.js
