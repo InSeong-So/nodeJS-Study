@@ -44,15 +44,15 @@ app.route('/api/todos')
         res.json(result)
     })
     // detail
-app.route('/api/detail/:idx')
+app.route('/api/detail/:parent')
     .get(async(req, res) => {
         const result = { success: true }
-        const idx = req.params.idx
+        const parent = req.params.parent
         try {
             const json = await db.getData()
             list = []
             json.detail.forEach((v, idx) => {
-                if (v.idx === idx) {
+                if (v.parent === parent) {
                     v.idx = idx
                     list.push(v)
                 }
@@ -67,10 +67,10 @@ app.route('/api/detail/:idx')
     .post(async(req, res) => {
         const result = { success: true }
         const detail = req.body.detail
-        const idx = req.params.idx
+        const parent = req.params.parent
         try {
             const json = await db.getData()
-            detail.idx = idx
+            detail.parent = parent
             json.detail.push(detail)
             await db.setData(json)
         } catch (err) {
@@ -82,7 +82,7 @@ app.route('/api/detail/:idx')
     .put(async(req, res) => {
         const result = { success: true }
         const detail = req.body.detail
-        const idx = req.params.idx
+        const idx = req.params.parent
         try {
             const json = await db.getData()
             json.detail[idx] = detail
@@ -96,7 +96,7 @@ app.route('/api/detail/:idx')
     .delete(async(req, res) => {
         const result = { success: true }
         const detail = req.body.detail
-        const idx = req.params.idx
+        const idx = req.params.parent
     })
 
 app.listen(8226, () => {
