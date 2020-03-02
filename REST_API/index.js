@@ -28,7 +28,6 @@ app.route('/api/todos')
             result.err = err
         }
         res.json(result)
-        console.log(result)
     })
     .post(async(req, res) => {
         const result = { success: true }
@@ -47,13 +46,12 @@ app.route('/api/todos')
 app.route('/api/detail/:idx')
     .get(async(req, res) => {
         const result = { success: true }
-        const idx = req.params.idx
+        const reIdx = req.params.idx
         try {
             const json = await db.getData()
             list = []
             json.detail.forEach((v, idx) => {
-                if (v.idx === idx) {
-                    v.idx = idx
+                if (v.idx === reIdx) {
                     list.push(v)
                 }
             })
@@ -67,6 +65,7 @@ app.route('/api/detail/:idx')
     .post(async(req, res) => {
         const result = { success: true }
         const detail = req.body.detail
+        console.log(detail)
         const idx = req.params.idx
         try {
             const json = await db.getData()
@@ -82,6 +81,7 @@ app.route('/api/detail/:idx')
     .put(async(req, res) => {
         const result = { success: true }
         const detail = req.body.detail
+        console.log(detail)
         const idx = req.params.idx
         try {
             const json = await db.getData()

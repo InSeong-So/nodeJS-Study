@@ -104,9 +104,16 @@ class Renderer {
     }
 
     todosRender(todos) {
-        const ul = create('ul')
+        const ul = create('ul', {
+            class: 'list-group'
+        })
         todos.forEach((v, k) => {
-            ul.appendChild(create('li', {html: v.name, event: {click: this.detailRender(v.name, k)}}))
+            ul.appendChild(create('li', {
+                html: v.name,
+                class: 'list-group-item',
+                event: {click: this.detailRender(v.name, k)}
+            }))
+
         })
         this.todosList.innerHTML = ''
         this.todosList.appendChild(ul)
@@ -115,22 +122,26 @@ class Renderer {
     detailRender(todosName, idx) {
         const $this = this
         return async e => {
-            const title = create('h3', {html: todosName})
-            const ul = create('ul')
+            const title = create('p', {class:'lead', html: todosName})
+            const ul = create('ul', {class:'list-group'})
             const detail = await $this.model.getDetail(idx)
             const input = create('input', {
-                class: 'detail-input',
-                size: 20,
+                type:'text',
+                class: 'detail-input form-control',
                 placeholder: 'detail 입력',
+                style: 'margin-top:20px;',
                 event: {keyup: $this.addDetail(e, idx)}
             })
             const close = create('button', {
                 type: 'button',
+                class:'btn btn-primary',
                 html: '닫기',
+                style: 'margin-top:50px;',
                 event: {click: e => $this.detailList.innerHTML = ''}
             })
             detail.forEach(v => ul.appendChild($this.detailChildRender(v)))
             $this.detailList.innerHTML = ''
+
             for (const ele of [title, input, ul, close]) $this.detailList.appendChild(ele)
         }
     }
@@ -138,6 +149,7 @@ class Renderer {
     detailChildRender(v) {
         const $this = this
         return create('li', {
+            class:'list-group-item',
             html: v.name,
             style: v.state ? 'color:#09F' : '',
             event: {click: $this.setDetail(v)}
