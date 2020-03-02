@@ -2,36 +2,7 @@ let http = require('http');
 let fs = require('fs');
 let url = require('url');
 let qs = require('querystring');
-
-let template = {
-    html: function (title, list, body, control) {
-        return `
-                <!doctype html>
-                <html>
-                <head>
-                  <title>WEB1 - ${title}</title>
-                  <meta charset="utf-8">
-                </head>
-                <body>
-                  <h1><a href="/">WEB</a></h1>
-                    ${list}
-                    ${control}
-                    ${body}
-                </body>
-                </html>
-                `;
-    },
-    list: function (fileList) {
-        let list = '<ul>';
-        let i = 0;
-        while (i < fileList.length) {
-            list = list + `<li><a href="/?id=${fileList[i]}">${fileList[i]}</a></li>`;
-            i = i + 1;
-        }
-        list = list + '</ul>';
-        return list;
-    }
-}
+let template = require('./lib/template');
 
 let app = http.createServer(function (request, response) {
     let _url = request.url;
@@ -150,4 +121,6 @@ let app = http.createServer(function (request, response) {
         response.end('Not Found');
     }
 });
-app.listen(8226);
+app.listen(8226, function(){
+    console.log("server started!");
+});
