@@ -1,0 +1,34 @@
+{
+  "todos": [
+    {
+      "idx": "1",
+      "name": "FIRST THING"
+    },
+    {
+      "idx": "2",
+      "name": "SECOND THING"
+    }
+  ],
+  "detail": [
+    {
+      "name": "test3",
+      "state": true,
+      "idx": "0"
+    },
+    {
+      "name": "test44",
+      "state": false,
+      "idx": "0"
+    },
+    {
+      "name": "test",
+      "state": false,
+      "idx": "0"
+    },
+    {
+      "name": "test42",
+      "state": false,
+      "idx": "1"
+    }
+  ]
+}
