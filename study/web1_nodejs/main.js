@@ -3,13 +3,15 @@ let fs = require('fs');
 let url = require('url');
 let qs = require('querystring');
 let template = require('./lib/template');
+let path = require('path');
 
 let app = http.createServer(function (request, response) {
     let _url = request.url;
     let queryData = url.parse(_url, true).query;
     let pathName = url.parse(_url, true).pathname;
+    let filteredId = path.parse(queryData.id).base;
     if (pathName === '/') {
-        if (queryData.id === undefined) {
+        if (filteredId === undefined) {
             fs.readdir('data', function (err, fileList) {
                 let title = 'Welcome';
                 let description = 'Hello, Node.js';
@@ -23,8 +25,9 @@ let app = http.createServer(function (request, response) {
             })
         } else {
             fs.readdir('data', function (err, fileList) {
-                fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
-                    let title = queryData.id;
+                let filteredId = path.parse(queryData.id).base;
+                fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
+                    let title = filteredId;
                     let list = template.list(fileList);
                     let html = template.html(title, list,
                         `<h2>${title}</h2>${description}`,
@@ -70,8 +73,9 @@ let app = http.createServer(function (request, response) {
         });
     } else if (pathName === '/update') {
         fs.readdir('data', function (err, fileList) {
-            fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
-                let title = queryData.id;
+            let filteredId = path.parse(queryData.id).base;
+            fs.readFile(`data/${filteredId}`, 'utf8', function (err, description) {
+                let title = filteredId;
                 let list = template.list(fileList);
                 let html = template.html(title, list, `
                 <form action="/process_update" method="post">
@@ -111,7 +115,8 @@ let app = http.createServer(function (request, response) {
         request.on('end', function () {
             let post = qs.parse(body);
             let id = post.id;
-            fs.unlink(`data/${id}`, function (err) {
+            let filteredId = path.parse(id).base;
+            fs.unlink(`data/${filteredId}`, function (err) {
                 response.writeHead(302, {Location: `/`});
                 response.end();
             });
